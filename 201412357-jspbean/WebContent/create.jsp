@@ -1,3 +1,4 @@
+<%@page import="java.lang.ProcessBuilder.Redirect"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "testBean.studentDAO" %>
 <% request.setCharacterEncoding("utf-8"); %>
@@ -13,5 +14,7 @@
  request.setCharacterEncoding("UTF-8");
  studentDAO insert = new studentDAO();
  insert.insert(item);
+ 
+ response.sendRedirect("read.jsp");
 %>
  

@@ -1,23 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
+<%@ page import = "testBean.*" %>
+<%@ page import = "java.util.*" %>
+<% 
+	request.setCharacterEncoding("UTF-8");
+	studentDAO select = new studentDAO();
+	List<studentVO> rsList = new ArrayList<studentVO>();
+	rsList = select.select();%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 <%
- Class.forName("com.mysql.jdbc.Driver");
- Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/201412357","201412357","123456789");
- 
- PreparedStatement pstmt = conn.prepareStatement("select * from student");
- ResultSet rs = pstmt.executeQuery();
- 
- while(rs.next()) {
-  String number = rs.getString("number");
-  String name = rs.getString("name"); %>
-  <%= number %>
-  <%= name %><br>
-   <% }
+ for(int i=0;i<rsList.size();i++) {
+  studentVO student = (studentVO)rsList.get(i);
 %>
+<%=student.getNumber()%>
+<%=student.getName() %><br>
+<%} %>
 </body>
 </html>

@@ -14,14 +14,20 @@ public class studentDAO {
   sql.executeUpdate();
  }
  
-// public List<studentVO> select() throws Exception { //List에 record set을 담아 넘겨 준다
-//	   List<studentVO> rsList = new ArrayList<studentVO>();
-//	 
-//	 while(rs.next()) {
-//	 
-//	   rsList.add(item);
-//	   } 
-//	  return rsList;
-//	 }
+ public List<studentVO> select() throws Exception { //List에 record set을 담아 넘겨 준다
+	   List<studentVO> rsList = new ArrayList<studentVO>();
+	   
+	   Class.forName("com.mysql.jdbc.Driver");
+	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/201412357","201412357","123456789");
+	   PreparedStatement sql = conn.prepareStatement("select * from student");
+	   ResultSet rs = sql.executeQuery();
+	 while(rs.next()) {
+		studentVO item = new studentVO();
+		item.setNumber(rs.getString("number"));
+		item.setName(rs.getString("name"));
+	   rsList.add(item);
+	   } 
+	  return rsList;
+	 }
 }
 
